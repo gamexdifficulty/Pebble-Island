@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from main import Game
 
 class NetworkManager(NetworkObject):
-    def __init__(self,game:Game):
+    def __init__(self,game:"Game"):
         # super().__init__(("penguin.frostlightgames.net",50450))
         super().__init__(("192.168.2.128",50450))
         self.game = game

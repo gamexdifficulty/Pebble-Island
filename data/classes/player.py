@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from main import Game
 
 class Player:
-    def __init__(self, game:Game, can_be_controlled=False):
+    def __init__(self, game:"Game", can_be_controlled=False):
         self.game = game
         self.x = 160
         self.y = 129
@@ -109,7 +109,7 @@ class Player:
         sprite = self.animation.get(self.animation_state)
         sprite.flipped = self.flipped
         sprite.alpha = self.alpha
-        self.game.window.render(sprite, [self.x,self.y])
+        self.game.window.render(sprite, [int(self.x),int(self.y)])
 
         if self.emoji != None:
             self.game.window.render(self.emoji_sprites[self.emoji], [self.x-1,self.y - 9])

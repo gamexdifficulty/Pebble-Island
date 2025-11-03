@@ -5,6 +5,6 @@ if TYPE_CHECKING:
     from data.server.classes.client import Client
 
 class EventPlayerChangeCosmetic():
-    def __init__(self, client:Client, player:Player):
+    def __init__(self, client:"Client", player:"Player"):
         self.client = client
         self.player = player
