@@ -96,7 +96,7 @@ class NetworkManager(NetworkObject):
     def player_do_emoji(self,packet:PacketDoEmoji):
         player = self.game.player_manager.get(packet.session_id)
         if player:
-            player.emoji = packet.emoji
+            player.do_emoji(packet.emoji)
 
     def loop(self):
         while self.game.running:
