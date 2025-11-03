@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class Client(NetworkObject):
     def __init__(self,game:"GameServer",connection:socket.socket,address:list):
-        super().__init__(connection, address)
+        super().__init__(connection, address, self.remove_player)
 
         self.game = game
         self.player = Player()
@@ -69,8 +69,10 @@ class Client(NetworkObject):
 
 
     def player_left(self):
-        self.connected = False
-        self.game.player_manager.unregister_player(self.player)
+        self.close()
+        self.remove_player()
+
+    def remove_player(self):
         self.game.event_queue.append(EventPlayerLeave(self, self.player))
 
     def player_get_session_id(self,packet:PacketRequestSessionID):

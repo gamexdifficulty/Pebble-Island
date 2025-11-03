@@ -7,10 +7,11 @@ from data.packets.packet import Packet
 from data.packets.packet_registry import PACKET_REGISTRY
 
 class NetworkObject:
-    def __init__(self,connection:socket.socket,address:list):
+    def __init__(self,connection:socket.socket,address:list,close_trigger_callback):
         self.connected = True
         self.socket = connection
         self.address = address
+        self.close_trigger = close_trigger_callback
 
         print(f'New Authentication: {address[0]}:{address[1]}')
 
@@ -26,7 +27,13 @@ class NetworkObject:
             data = self.pack(packet)
             self.socket.sendall(data)
         except Exception as e:
+            self.close()
             print(f'Error while sending data: {self.address[0]}:{self.address[1]}|{data}|{e}')
+
+    def close(self):
+        self.connected = False
+        self.socket.close()
+        self.close_trigger()
 
     def unpack(self, data: bytes):
         try:

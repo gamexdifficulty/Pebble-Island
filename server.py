@@ -52,6 +52,7 @@ class GameServer:
                             self.player_client_map[player].send(PacketUnloadPlayer(event.player.id))
 
                     # To Do Close client connection
+                    self.player_manager.unregister_player(event.player)
                     del self.clients[event.client.address]
                     del self.player_client_map[event.player]
 
@@ -114,6 +115,7 @@ class GameServer:
                 for player in self.player_manager.get_players_in_scene(scene).copy():
                     if player.id != None:
                         for updating_player in self.player_manager.get_players_in_scene(scene).copy():
+                            print("sending update")
                             self.player_client_map[updating_player].send(PacketUpdatePlayer(player.id,player.x, player.y, player.animation, player.flipped))
 
 

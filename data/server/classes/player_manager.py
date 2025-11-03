@@ -37,3 +37,7 @@ class PlayerManager:
     def unregister_player(self,player):
         if player.id in self.player_list:
             del self.player_list[player.id]
+
+        for scene in self.scene_list.copy():
+            if player in self.scene_list[scene]:
+                self.scene_list[scene].remove(player)
