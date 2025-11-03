@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 class NetworkManager(NetworkObject):
     def __init__(self,game:"Game"):
         # super().__init__(("penguin.frostlightgames.net",50450))
-        super().__init__(("192.168.2.128",50450))
+        super().__init__(("127.0.0.1",50450))
         self.game = game
 
         self.packet_function_map = {
