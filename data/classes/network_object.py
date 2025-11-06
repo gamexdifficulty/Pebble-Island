@@ -9,9 +9,10 @@ from data.packets.packet import Packet
 from data.packets.packet_registry import PACKET_REGISTRY
 
 class NetworkObject:
-    def __init__(self, address:list):
+    def __init__(self, address:list, debug:bool):
         self.connected = False
         self.address = address
+        self.debug = debug
 
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
@@ -28,7 +29,8 @@ class NetworkObject:
             data = self.pack(packet)
             self.socket.send(data)
         except Exception as e:
-            print(f"Error while sending package: {data}|{e}")
+            if self.debug:
+                print(f"Error while sending package: {data}|{e}")
 
     def run(self):
         threading.Thread(target=self.loop,args=()).start()
@@ -64,7 +66,8 @@ class NetworkObject:
             return result
 
         except Exception as e:
-            print(f"Error while unpacking packet {self.address[0]}:{self.address[1]} | {e}")
+            if self.debug:
+                print(f"Error while unpacking packet {self.address[0]}:{self.address[1]} | {e}")
 
     def pack(self,packet:Packet) -> bytes:
         try:
@@ -91,7 +94,8 @@ class NetworkObject:
             length = len(result)
             return length.to_bytes(2, "big") + result
         except Exception as e:
-            print(f'Error while packing package: {self.address[0]}:{self.address[1]}|{pack_id}|{data}|{e}')
+            if self.debug:
+                print(f'Error while packing package: {self.address[0]}:{self.address[1]}|{pack_id}|{data}|{e}')
 
     def close(self):
         self.connected = False

@@ -12,6 +12,7 @@ class Game(FrostlightEngine):
     def __init__(self):
         super().__init__(canvas_size=[320,180])
         self.running = True
+        self.debug = True
 
         self.state = "main_menu"
 

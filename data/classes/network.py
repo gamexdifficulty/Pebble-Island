@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 class NetworkManager(NetworkObject):
     def __init__(self,game:"Game"):
         # super().__init__(("penguin.frostlightgames.net",50450))
-        super().__init__(("127.0.0.1",50450))
+        super().__init__(("127.0.0.1",50450),game.debug)
         self.game = game
 
         self.packet_function_map = {
@@ -54,7 +54,8 @@ class NetworkManager(NetworkObject):
                     handler(packet)
 
             except Exception as e:
-                print(f"Error while receiving data: {self.address[0]}:{self.address[1]} | {e}")
+                if self.game.debug:
+                    print(f"Error while receiving data: {self.address[0]}:{self.address[1]} | {e}")
                 self.close()
 
     def get_session_id(self, packet:PacketReturnSessionID):
