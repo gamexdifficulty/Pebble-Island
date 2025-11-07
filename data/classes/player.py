@@ -54,7 +54,7 @@ class Player:
                 self.emoji = None
 
         if self.alpha != 1.0:
-            self.alpha = min(1,self.alpha+self.game.delta_time*0.5)
+            self.alpha = min(1,self.alpha+self.game.delta_time*0.75)
       
         if self.can_be_controlled:
             direction = self.game.input.get("right")-self.game.input.get("left")
