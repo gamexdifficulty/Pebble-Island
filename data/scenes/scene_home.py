@@ -1,27 +1,35 @@
 import os
 import time
+from typing import TYPE_CHECKING
 from frostlight_engine import *
+
+if TYPE_CHECKING:
+    from main import Game
 
 # Mili Palette
 
 class SceneHome:
-    def __init__(self,game):
+    def __init__(self,game:"Game"):
         self.game = game
         self.island_sprite = Sprite(os.path.join("scene1","island.png"))
         self.house_sprite = Sprite(os.path.join("scene1","house.png"))
-        self.water_sprite = Sprite(os.path.join("scene1","waterfg.png"))
+        self.water_fg_sprite = Sprite(os.path.join("scene1","water.png"))
+        self.water_bg_sprite = Sprite(os.path.join("scene1","water.png"))
         self.cloud_sprite = Sprite(os.path.join("scene1","clouds.png"))
 
-        self.water_sprite.set_custom_shader("water_wave.frag")
+        self.water_fg_sprite.set_custom_shader("water_wave_fg.frag")
+        self.water_bg_sprite.set_custom_shader("water_wave_bg.frag")
 
     def update(self):
         self.game.player_manager.update()
-        self.water_sprite.set_custom_uniforms("uTime",time.time() % 1000)
+        self.water_fg_sprite.set_custom_uniforms("uTime",time.time() % 1000)
+        self.water_bg_sprite.set_custom_uniforms("uTime",time.time() % 1000)
 
     def draw(self):
         self.game.window.fill(76,139,216)
+        self.game.window.render(self.water_bg_sprite,[0,137])
         self.game.window.render(self.island_sprite,[0,0])
-        self.game.window.render(self.water_sprite,[0,155])
+        self.game.window.render(self.water_fg_sprite,[0,150])
         self.game.window.render(self.house_sprite,[0,0])
         self.game.player_manager.draw()
         self.game.window.render(self.cloud_sprite,[0,0])
