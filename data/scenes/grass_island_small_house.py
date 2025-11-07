@@ -27,9 +27,9 @@ class SceneHome:
 
     def draw(self):
         self.game.window.fill(76,139,216)
-        self.game.window.render(self.water_bg_sprite,[0,137])
+        self.game.window.render(self.water_bg_sprite,[0,132])
         self.game.window.render(self.island_sprite,[0,0])
-        self.game.window.render(self.water_fg_sprite,[0,150])
+        self.game.window.render(self.water_fg_sprite,[0,145])
         self.game.window.render(self.house_sprite,[0,0])
         self.game.player_manager.draw()
         self.game.window.render(self.cloud_sprite,[0,0])

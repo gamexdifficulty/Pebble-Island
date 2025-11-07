@@ -5,8 +5,8 @@ from data.classes.player_manager import PlayerManager
 from data.classes.scene_manager import SceneManager
 from data.classes.player import Player
 
-from data.scenes.scene_home import SceneHome
-from data.scenes.scene_main_menu import SceneMainMenu
+from data.scenes.grass_island_small_house import SceneHome
+from data.scenes.main_menu import SceneMainMenu
 
 from data.classes.font import Font
 
@@ -35,10 +35,10 @@ class Game(FrostlightEngine):
         self.player = Player(self,True)
         self.player_manager.register_player(self.player)
 
-        self.scene_manager.register_scene("home", SceneHome(self))
+        self.scene_manager.register_scene("grass_island_small_house", SceneHome(self))
         self.scene_manager.register_scene("main_menu", SceneMainMenu(self))
 
-        self.scene_manager.load_scene("home")
+        self.scene_manager.load_scene("grass_island_small_house")
 
         self.font = Font(self,1)
 

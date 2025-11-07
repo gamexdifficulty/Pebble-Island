@@ -12,7 +12,7 @@ class Player:
     def __init__(self, game:"Game", can_be_controlled=False):
         self.game = game
         self.x = 160
-        self.y = 129
+        self.y = 120
         self.target_x = self.x
         self.target_y = self.y
         self.id = None
