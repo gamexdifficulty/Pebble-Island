@@ -96,7 +96,6 @@ class Sprite:
         self._vao = self._ctx.vertex_array(self._program, [(self._vbo, "2f 2f", "vert", "tex")])
 
     def _load_texture(self,path,texture_filter,preferred_size):
-        print(path)
         texture = None
         self.size = [1,1]
         if path != None:
