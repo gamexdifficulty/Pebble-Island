@@ -13,7 +13,7 @@ from data.classes.time import Time
 
 class Game(FrostlightEngine):
     def __init__(self):
-        super().__init__(canvas_size=[320,180])
+        super().__init__(canvas_size=[320,180],fps_limit=165)
         self.running = True
         self.debug = True
 
