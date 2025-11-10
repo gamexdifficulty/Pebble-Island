@@ -3,6 +3,8 @@ from frostlight_engine import *
 from data.classes.network import NetworkManager
 from data.classes.player_manager import PlayerManager
 from data.classes.scene_manager import SceneManager
+from data.classes.overlay_manager import OVERLAY_MANAGER
+from data.overlays import *
 from data.classes.player import Player
 
 from data.scenes.grass_island_small_house import SceneHome
@@ -32,6 +34,7 @@ class Game(FrostlightEngine):
         self.network_manager = NetworkManager(self)
         self.scene_manager = SceneManager(self)
         self.player_manager = PlayerManager(self)
+        self.overlay_manager = OVERLAY_MANAGER
 
         self.player = Player(self,True)
         self.player_manager.register_player(self.player)
@@ -40,6 +43,8 @@ class Game(FrostlightEngine):
         self.scene_manager.register_scene("main_menu", SceneMainMenu(self))
 
         self.scene_manager.load_scene("grass_island_small_house")
+
+        self.overlay_manager.load_overlay("test_overlay")
 
         self.font = Font(self,1)
         self.time = Time(self)
@@ -53,9 +58,11 @@ class Game(FrostlightEngine):
     def update(self):
         self.time.update()
         self.scene_manager.update()
+        self.overlay_manager.update()
 
     def draw(self):
         self.scene_manager.draw()
+        self.overlay_manager.draw()
 
 game = Game()
 game.run()

@@ -1,6 +1,5 @@
 class OverlayManager:
-    def __init__(self, game):
-        self.game = game
+    def __init__(self):
         self.overlay = {}
         self.overlay_current = None
         self.overlay_active = False
@@ -13,7 +12,8 @@ class OverlayManager:
         if self.overlay_current != None:
             self.overlay[self.overlay_current].draw()
 
-    def register_overlay(self, overlay_name, overlay):
+    def register_overlay(self, overlay):
+        overlay_name = overlay.OVERLAY_NAME
         self.overlay[overlay_name] = overlay
 
     def load_overlay(self, overlay_name):
@@ -24,3 +24,4 @@ class OverlayManager:
         self.overlay_current = None
         self.overlay_active = False
         
+OVERLAY_MANAGER = OverlayManager()
