@@ -4,6 +4,7 @@ from frostlight_engine import *
 from typing import TYPE_CHECKING
 
 from frostlight_engine import *
+from data.classes.sky import Sky
 from data.classes.animation import Animation
 
 if TYPE_CHECKING:
@@ -22,6 +23,8 @@ class SceneHome:
         self.water_bg_sprite = Sprite(os.path.join("scenes","grass_island_small_house","water.png"))
         self.cloud_sprite = Sprite(os.path.join("scenes","grass_island_small_house","clouds.png"))
 
+        self.sky = Sky(self.game)
+
         self.grass_animation = Animation(self.game)
         grass_sprites = []
         for i in range(18):
@@ -39,7 +42,7 @@ class SceneHome:
         self.water_bg_sprite.set_custom_uniforms("uTime",time.time() % 1000)
 
     def draw(self):
-        self.game.window.fill(76,139,216)
+        self.sky.draw()
         self.game.window.render(self.water_bg_sprite,[0,132])
         self.game.window.render(self.island_sprite,[0,0])
         self.game.window.render(self.water_fg_sprite,[0,145])
