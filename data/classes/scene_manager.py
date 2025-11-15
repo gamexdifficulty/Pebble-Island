@@ -5,8 +5,13 @@ import data
 
 blacklist = ["inside_house"]
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from main import Game
+
 class SceneManager:
-    def __init__(self, game):
+    def __init__(self, game:"Game"):
         self.game = game
         self.scenes = {}
         self.current_scene = None
@@ -36,3 +41,4 @@ class SceneManager:
 
     def load_scene(self, scene_name):
         self.current_scene = scene_name
+        self.game.save_manager.save("current_scene",scene_name)

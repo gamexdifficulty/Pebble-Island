@@ -4,6 +4,7 @@ from data.classes.network import NetworkManager
 from data.classes.player_manager import PlayerManager
 from data.classes.scene_manager import SceneManager
 from data.classes.overlay_manager import OverlayManager
+from data.classes.save_manager import SaveManager
 from data.classes.player import Player
 from data.classes.font import Font
 from data.classes.time import Time
@@ -29,6 +30,7 @@ class Game(FrostlightEngine):
         self.input.new("emoji8",KEY_8,CLICKED)
         self.input.new("emoji9",KEY_9,CLICKED)
 
+        self.save_manager = SaveManager(self)
         self.network_manager = NetworkManager(self)
         self.scene_manager = SceneManager(self)
         self.player_manager = PlayerManager(self)
@@ -40,8 +42,7 @@ class Game(FrostlightEngine):
 
         self.player_manager.register_player(self.player)
 
-        self.scene_manager.load_scene("grass_island_small_house")
-        self.overlay_manager.load_overlay("test_overlay")
+        self.scene_manager.load_scene(self.save_manager.load("current_scene","grass_island_small_house"))
 
         self.network_manager.run()
     
