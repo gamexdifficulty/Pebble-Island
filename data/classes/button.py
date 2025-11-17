@@ -18,7 +18,7 @@ class Button:
         else:
             self.size = size
 
-        self.selected = False
+        self.selected = True
 
         self.callback = callback
         self.rect = pygame.Rect(self.pos[0],self.pos[1],self.size[0],self.size[1])
