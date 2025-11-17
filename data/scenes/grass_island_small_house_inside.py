@@ -2,7 +2,7 @@ import os
 from frostlight_engine import *
 
 class SceneGrassIslandInside:
-    SCENE_NAME = "grass_Island_Inside"
+    SCENE_NAME = "grass_island_inside"
 
     def __init__(self,game):
         self.game = game
