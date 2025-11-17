@@ -38,4 +38,5 @@ class SceneManager:
 
     def load_scene(self, scene_name):
         self.current_scene = scene_name
-        self.game.save_manager.save("current_scene",scene_name)
+        if scene_name != "main_menu":
+            self.game.save_manager.save("current_scene",scene_name)
